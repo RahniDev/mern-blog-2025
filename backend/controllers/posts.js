@@ -1,12 +1,14 @@
-const Post = require("../models/Post")
-const ObjectID = require("mongoose").Types.ObjectId;
+import Post from "../models/Post.js"
+import mongoose from "mongoose"
+import { errorHandler } from "../helpers/dbErrorHandler.js";
 
-exports.read = (req, res) => {
+
+export const read = (req, res) => {
     console.log(req.post)
     return res.json(req.post)
 }
 
-exports.list = (req, res) => {
+export const list = (req, res) => {
     const sort = { title: 1 }
     Post.find()
         .sort(sort)
@@ -14,7 +16,7 @@ exports.list = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err))
 }
 
-exports.readBySlug = (req, res) => {
+export const readBySlug = (req, res) => {
     const id = req.params.id
     const slug = req.params.slug
     Post.findById(id)
@@ -22,7 +24,7 @@ exports.readBySlug = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err))
 }
 
-exports.create = (req, res) => {
+export const create = (req, res) => {
     const { title, body } = req.body
     const post = new Post({
         title,
@@ -39,10 +41,10 @@ exports.create = (req, res) => {
             })
         })
 }
-
-exports.edit = (req, res) => {
+const Schema = mongoose.Schema;
+export const edit = (req, res) => {
     const id = req.params.id
-    if (!ObjectID.isValid(id))
+    if (!Schema.Types.ObjectID.isValid(id))
         return res.status(400).send(`No post with given id: ${id}`)
     const { title, body } = req.body
 
@@ -64,7 +66,7 @@ exports.edit = (req, res) => {
     )
 }
 
-exports.deletePost = (req, res) => {
+export const deletePost = (req, res) => {
     Post.deleteOne({ _id: req.params.id })
         .then(() => {
             console.log(req.params.id)

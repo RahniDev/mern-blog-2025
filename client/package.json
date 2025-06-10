@@ -1,6 +1,7 @@
 {
   "name": "client",
   "private": true,
+  "proxy": "localhost:5000",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -11,7 +12,8 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

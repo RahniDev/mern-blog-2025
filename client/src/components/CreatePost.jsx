@@ -1,41 +1,28 @@
-import { useActionState } from "react"
-
-const addPost = async () => {
-fetch
-}
+import { useActionState, useEffect } from "react"
 
 const CreatePost = () => {
-    const [result, submitAction, isPending] = useActionState(
-        async (previousState, formData) => {
-            const title = formData.get("title")
-            const body = formData.get("body")
 
-            if (!title || !body) {
-                return {
-                    type: "error",
-                    message: "Please add a title and a body for your post."
-                }
-            }
-
-            await addPost()
-
-            return {
-                type: "success",
-                message: "You have successfully posted."
-            }
-        },
-        null
-    )
+ async function createPostOnSubmit() {
+       const response = await fetch(`http://localhost:8000/posts/new-post`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'React POST totally Example', body: "fstgbjhds" })
+        })
+            .then(() => {
+                console.log(response.json())
+            })
+            .catch((err) => console.log(err));
+    }
 
     return (
         <div>
-            {result && <p>{result.message}</p>}
-            {isPending && <p>Loading ...</p>}
-            <form action={submitAction}>
+            {/* {result && <p>{result.message}</p>} */}
+            {/* {isPending && <p>Loading ...</p>} */}
+            <form>
                 <h1>Add post!</h1>
                 <input type="text" name="title" />
                 <input type="text" name="body" />
-                <button type="submit">Create</button>
+                <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
         </div>
     )

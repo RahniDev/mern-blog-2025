@@ -11,7 +11,7 @@ const {
 
 router.get("/", list)
 router.get("/:slug/:id", readBySlug)
-router.post("/new-post/:id", create)
+router.post("/new-post", create)
 router.put("/:id/edit", edit)
 router.delete("/:id", (deletePost))
 
