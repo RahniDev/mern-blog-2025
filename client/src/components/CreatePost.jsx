@@ -6,7 +6,7 @@ const CreatePost = () => {
        const response = await fetch(`http://localhost:8000/posts/new-post`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'React POST totally Example', body: "fstgbjhds" })
+            body: JSON.stringify({ title: 'React Tgyu totally Example', body: "fstgbjhds" })
         })
             .then(() => {
                 console.log(response.json())
