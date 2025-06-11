@@ -1,17 +1,30 @@
-import { useActionState, useEffect } from "react"
+import { useActionState, useEffect, useState } from "react"
 
 const CreatePost = () => {
+    const [title, setTitle] = useState("")
+    const [body, setBody] = useState("")
 
- async function createPostOnSubmit() {
-       const response = await fetch(`http://localhost:8000/posts/new-post`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'React Tgyu totally Example', body: "fstgbjhds" })
-        })
-            .then(() => {
-                console.log(response.json())
+    const createPostOnSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:8000/posts/new-post`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: `${title}`, body: `${body}` })
             })
-            .catch((err) => console.log(err));
+            const data = await response.json()
+            console.log(data)
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    const titleInputChange = (event) => {
+        setTitle(event.target.value)
+    }
+
+    const bodyInputChange = (event) => {
+        setBody(event.target.value)
     }
 
     return (
@@ -20,8 +33,8 @@ const CreatePost = () => {
             {/* {isPending && <p>Loading ...</p>} */}
             <form>
                 <h1>Add post!</h1>
-                <input type="text" name="title" />
-                <input type="text" name="body" />
+                <input type="text" name="title" value={title} onChange={titleInputChange} />
+                <textarea type="text" name="body" value={body} onChange={bodyInputChange}></textarea>
                 <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
         </div>
