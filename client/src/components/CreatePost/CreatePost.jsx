@@ -1,4 +1,5 @@
-import { useActionState, useEffect, useState } from "react"
+import { useState } from "react"
+import './createPost.css'
 
 const CreatePost = () => {
     const [title, setTitle] = useState("")
@@ -34,10 +35,10 @@ const CreatePost = () => {
     return (
         <div>
             {/* {isPending && <p>Loading ...</p>} */}
-            <form>
+            <form id="add-post_form">
                 <h1>Add post!</h1>
-                <input type="text" name="title" value={title} onChange={titleInputChange} />
-                <textarea type="text" name="body" value={body} onChange={bodyInputChange}></textarea>
+                <input type="text" name="title" value={title} placeholder="Title" onChange={titleInputChange} />
+                <textarea type="text" name="body" value={body} placeholder="Content" onChange={bodyInputChange}></textarea>
                 <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
             {isPostCreated && <p>Your new post has been successfully published !</p>}

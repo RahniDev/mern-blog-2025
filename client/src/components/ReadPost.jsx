@@ -23,7 +23,10 @@ const [error, setError] = useState(false)
 
  
   return (
-    <div>ReadPost</div>
+    <div>ReadPost
+      {isAdmin && (<div><Link to="/:id">Delete Post</Link>
+      <Link to="/:id/edit">Edit Post</Link></div>)}
+    </div>
   )
 }
 

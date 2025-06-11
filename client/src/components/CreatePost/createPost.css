@@ -1,0 +1,4 @@
+#add-post_form {
+    display: flex;
+    flex-direction: column;
+}
