@@ -1,13 +1,11 @@
 import Navbar from './Navbar'
-import AllPosts from './AllPosts'
-import CreatePost from './CreatePost'
+import AllPosts from './AllPosts/AllPosts'
 
 const Home = () => {
   return (
-     <div>
+    <div>
       <Navbar />
-      <CreatePost />
-      <h1>Blog</h1>
+      <h1>AI Blog</h1>
       <AllPosts />
     </div>
   )

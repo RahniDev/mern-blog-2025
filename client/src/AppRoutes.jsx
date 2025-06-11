@@ -12,7 +12,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/:slug/:id' element={<ReadPost />} />
-      <Route path='/new-post/:id' element={<CreatePost />} />
+      <Route path='/new-post' element={<CreatePost />} />
       <Route path='/:id/edit' element={<EditPost />} />
       <Route path='/:id' element={<DeletePost />} />
     </Routes>

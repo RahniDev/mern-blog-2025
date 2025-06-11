@@ -1,0 +1,13 @@
+.all-posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2%;
+}
+a {
+    color: black;
+}
+
+.grid_single-post {
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import './allPosts.css'
 
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState([])
@@ -19,13 +20,13 @@ const AllPosts = () => {
   }, [])
 
   return (
-    <>
+    <div className='all-posts'>
       {allPosts && allPosts.map((post) =>
-        <Link key={post._id} to={`/posts/${post.slug}/${post._id}`}><div key={post._id}><h2>{post.title}</h2>
+        <Link className="grid_single-post" key={post._id} to={`/posts/${post.slug}/${post._id}`}><div key={post._id}><h2>{post.title}</h2>
           <p>{post.body}</p>
         </div></Link>
       )}
-    </>
+    </div>
   )
 }
 

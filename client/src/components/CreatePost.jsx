@@ -3,6 +3,7 @@ import { useActionState, useEffect, useState } from "react"
 const CreatePost = () => {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
+    const [isPostCreated, setIsPostCreated] = useState(false)
 
     const createPostOnSubmit = async (event) => {
         event.preventDefault();
@@ -13,12 +14,15 @@ const CreatePost = () => {
                 body: JSON.stringify({ title: `${title}`, body: `${body}` })
             })
             const data = await response.json()
-            console.log(data)
+            setIsPostCreated(true)
         } catch (err) {
             console.error(err)
         }
+       if (!title || !body) {
+            setIsPostCreated(false)
+        } 
     }
-
+    
     const titleInputChange = (event) => {
         setTitle(event.target.value)
     }
@@ -29,7 +33,6 @@ const CreatePost = () => {
 
     return (
         <div>
-            {/* {result && <p>{result.message}</p>} */}
             {/* {isPending && <p>Loading ...</p>} */}
             <form>
                 <h1>Add post!</h1>
@@ -37,6 +40,7 @@ const CreatePost = () => {
                 <textarea type="text" name="body" value={body} onChange={bodyInputChange}></textarea>
                 <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
+            {isPostCreated && <p>Your new post has been successfully published !</p>}
         </div>
     )
 }
