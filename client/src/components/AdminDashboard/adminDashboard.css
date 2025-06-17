@@ -1,0 +1,40 @@
+.post-count {
+    text-align: left;
+}
+
+.post-count_header {
+    margin: 0;
+}
+
+.post-count_btn {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.mypost {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mypost .post_buttons .edit_btn {
+    padding-right: 10px;
+}
+
+.mypost .post_buttons .delete_btn {
+    color: red;
+}
+
+.admin-title-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-title-btn .create-btn {
+    border: 2px solid green;
+    border-radius: 12px;
+    color: green;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 5px 10px;
+}

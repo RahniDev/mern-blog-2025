@@ -5,10 +5,13 @@ import CreatePost from './components/CreatePost/CreatePost'
 import EditPost from './components/EditPost/EditPost'
 import ReadPost from './components/ReadPost/ReadPost'
 import AdminDashboard from './components/AdminDashboard/AdminDashboard'
+import Navbar from './components/Navbar/Navbar';
 
 const AppRoutes = () => {
 
   return (
+    <>
+    <Navbar/>
     <Routes>
       <Route path='/' element={<Home />} />
       {/* <Route path='/:slug/:id' element={<ReadPost />} /> */}
@@ -17,6 +20,7 @@ const AppRoutes = () => {
       <Route path='/:id/edit' element={<EditPost />} />
       <Route path="/admin-dashboard" element={<AdminDashboard />} />
     </Routes>
+    </>
   )
 }
 

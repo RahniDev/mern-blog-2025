@@ -48,8 +48,9 @@ const AdminDashboard = () => {
       <>
         <div className="mypost">
           <Link className="mypost_title" to={`/post/${post.slug}/${post._id}`}>
-            <h2 className="mypost_title title1">{post.title}</h2>
+            <h2 className="mypost_title">{post.title}</h2>
           </Link>
+          <div className='post_buttons'>
           <Link
             className="mypost_btn edit_btn"
             to={`/post/${post._id}/edit`}>
@@ -62,9 +63,11 @@ const AdminDashboard = () => {
             >
               Delete
             </span>
+            
           ) : (
             ""
           )}
+          </div>
         </div>
         <hr className="hr" />
       </>
@@ -72,12 +75,12 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div><h1>Admin Dashboard</h1>
-      <Link to='/new-post'>Create Post</Link>
-      <div><h4>Total Posts</h4>
-        <p>{posts.length}</p>
+    <div>
+      <div className='admin-title-btn'><h1>Admin Dashboard</h1>
+      <Link className="create-btn" to='/new-post'>Create Post</Link></div>
+      <div className='post-count'><h4 className='post-count_header'>Total Posts</h4>
+        <p className='post-count_btn'>{posts.length}</p></div>
         <div>{displayPosts(posts)}</div>;
-      </div>
     </div>
   )
 }
