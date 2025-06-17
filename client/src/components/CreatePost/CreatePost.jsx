@@ -34,7 +34,6 @@ const CreatePost = () => {
 
     return (
         <div>
-            {/* {isPending && <p>Loading ...</p>} */}
             <form id="add-post_form">
                 <h1>Add post!</h1>
                 <input type="text" name="title" value={title} placeholder="Title" onChange={titleInputChange} />

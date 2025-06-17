@@ -1,10 +1,11 @@
 import { useState } from "react"
+import './readPost.css'
 
 const ReadPost = () => {
 const [post, setPost] = useState({})
 const [error, setError] = useState(false)
 
-  const id = props.match.params.id
+  // const id = props.match.params.id
 
   const getSinglePost = async (slug, id) => {
     try {
@@ -15,18 +16,19 @@ const [error, setError] = useState(false)
       console.error(err)
     }
   }
-  useEffect(() => {
-        const slug = props.match.params.slug
-        getSinglePost(slug, id)
-         console.log(id, slug)
-  }, [props])
+  // useEffect(() => {
+        // const slug = props.match.params.slug
+        // getSinglePost(slug, id)
+        //  console.log(id, slug)
+  // }, [props])
 
  
   return (
     <div>ReadPost
-      {isAdmin && (<div><Link to="/:id">Delete Post</Link>
-      <Link to="/:id/edit">Edit Post</Link></div>)}
-    </div>
+     {/* {post} */}
+      {/* {isAdmin && (<div><Link to="/:id">Delete Post</Link> */}
+      {/* <Link to="/:id/edit">Edit Post</Link></div>)}*/}
+    </div> 
   )
 }
 
