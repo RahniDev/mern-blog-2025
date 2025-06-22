@@ -15,7 +15,9 @@
     display: flex;
     justify-content: space-between;
 }
-
+.mypost a {
+    text-decoration: underline;
+}
 .mypost .post_buttons .edit_btn {
     padding-right: 10px;
 }

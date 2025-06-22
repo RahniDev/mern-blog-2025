@@ -3,8 +3,13 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 2%;
 }
+.all-posts h2 {
+    font-size: 20px;
+    line-height: 26px;
+}
 a {
     color: black;
+    text-decoration: none;
 }
 
 .grid_single-post {

@@ -1,35 +1,32 @@
-import { useState } from "react"
+import { useState, useEffect, useContext } from "react"
 import './readPost.css'
+import { ThemeContext } from '../../contexts.js';
 
 const ReadPost = () => {
-const [post, setPost] = useState({})
-const [error, setError] = useState(false)
+  const [post, setPost] = useState({})
+  const [error, setError] = useState(false)
 
-  // const id = props.match.params.id
+  const theme = useContext(ThemeContext);
 
-  const getSinglePost = async (slug, id) => {
-    try {
-      const response = await fetch(`http://localhost:8000/posts/${slug}/${id}`)
-      const data = await response.json()
-      setPost(data)
-    } catch (err) {
-      console.error(err)
-    }
-  }
+  // const getSinglePost = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:8000/posts/${post.slug}/${post._id}`)
+  //     const data = await response.json()
+  //     setPost(data)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
   // useEffect(() => {
-        // const slug = props.match.params.slug
-        // getSinglePost(slug, id)
-        //  console.log(id, slug)
-  // }, [props])
-
- 
-  return (
-    <div>ReadPost
-     {/* {post} */}
-      {/* {isAdmin && (<div><Link to="/:id">Delete Post</Link> */}
-      {/* <Link to="/:id/edit">Edit Post</Link></div>)}*/}
-    </div> 
-  )
+  //   getSinglePost()
+  // }, [])
+      console.log(theme)
+  return     <ThemeContext value={theme}>Theme</ThemeContext>
+  // return (
+  //   <div>
+      
+  //   </div>
+  // )
 }
 
 export default ReadPost

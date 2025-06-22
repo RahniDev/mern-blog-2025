@@ -4,6 +4,7 @@ import './adminDashboard.css'
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
+  const [redirect, setRedirect] = useState(false)
 
   const getAllPosts = async () => {
     try {
@@ -26,10 +27,15 @@ const AdminDashboard = () => {
         }
       })
       const data = await response.json()
-      window.confirm("Are you sure you want to permanently delete this post?")
+      if (window.confirm("Are you sure you want to permanently delete this post?")) {
+        setRedirect(true)
+      }
     } catch (err) {
       console.error(err)
     }
+  }
+  if (redirect) {
+    window.location.href="/admin-dashboard"
   }
 
   useEffect(() => {
@@ -47,26 +53,26 @@ const AdminDashboard = () => {
     return posts.map((post) => (
       <>
         <div className="mypost">
-          <Link className="mypost_title" to={`/post/${post.slug}/${post._id}`}>
+          <Link className="mypost_title" to={`/${post.slug}/${post._id}`}>
             <h2 className="mypost_title">{post.title}</h2>
           </Link>
           <div className='post_buttons'>
-          <Link
-            className="mypost_btn edit_btn"
-            to={`/post/${post._id}/edit`}>
-            Edit
-          </Link>
-          {post ? (
-            <span
-              className="mypost_btn delete_btn"
-              onClick={() => deletePost(post._id)}
-            >
-              Delete
-            </span>
-            
-          ) : (
-            ""
-          )}
+            <Link
+              className="mypost_btn edit_btn"
+              to={`/${post._id}/edit`}>
+              Edit
+            </Link>
+            {post ? (
+              <span
+                className="mypost_btn delete_btn"
+                onClick={() => deletePost(post._id)}
+              >
+                Delete
+              </span>
+
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <hr className="hr" />
@@ -77,10 +83,10 @@ const AdminDashboard = () => {
   return (
     <div>
       <div className='admin-title-btn'><h1>Admin Dashboard</h1>
-      <Link className="create-btn" to='/new-post'>Create Post</Link></div>
+        <Link className="create-btn" to='/new-post'>Create Post</Link></div>
       <div className='post-count'><h4 className='post-count_header'>Total Posts</h4>
         <p className='post-count_btn'>{posts.length}</p></div>
-        <div>{displayPosts(posts)}</div>;
+      <div>{displayPosts(posts)}</div>
     </div>
   )
 }
