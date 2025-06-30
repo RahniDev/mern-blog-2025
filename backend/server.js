@@ -27,7 +27,6 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
   next();
 });
-
 app.use('/posts', postRoutes)
 
 const port = process.env.PORT || 80

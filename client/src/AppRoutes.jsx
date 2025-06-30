@@ -7,15 +7,13 @@ import ReadPost from './components/ReadPost/ReadPost'
 import AdminDashboard from './components/AdminDashboard/AdminDashboard'
 import Navbar from './components/Navbar/Navbar';
 
-import AllPosts from './components/AllPosts/AllPosts';
-
 const AppRoutes = () => {
 
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<AllPosts />} />     
+        <Route path='/' element={<Home />} />     
         <Route path='/:slug/:id' element={<ReadPost />} />
         {/* only authenticated admin can access */}
         <Route path='/new-post' element={<CreatePost />} />
