@@ -1,5 +1,6 @@
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
+import { isAuthenticated } from "../AdminLogin/index";
 import './navbar.css'
 
 const Navbar = () => {
@@ -8,12 +9,6 @@ const Navbar = () => {
       <a className="logo" href="/"><img src={logo} alt="Yuzu Wellness Logo"
       width="80px" /></a>
       <ul>
-        <li>
-          <Link to="">DIY Recipes</Link>
-        </li>
-        <li>
-          <Link to="">Wellness</Link>
-        </li>
       </ul>
     </nav>
   )

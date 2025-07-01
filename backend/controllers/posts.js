@@ -1,7 +1,8 @@
 import Post from "../models/Post.js"
 import mongoose from "mongoose"
 import { errorHandler } from "../helpers/dbErrorHandler.js";
-
+import * as formidable from 'formidable';
+import fs from 'fs'
 
 export const read = (req, res) => {
     console.log(req.post)
@@ -24,23 +25,33 @@ export const readBySlug = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err))
 }
 
-export const create = (req, res) => {
-    const { title, body } = req.body
-    const post = new Post({
-        title,
-        body
-    })
-    post.save()
-        .then((response) => {
-            console.log("response" + response)
-            res.send(response)
+export const create = (req, res, next) => {
+    let form = new formidable.IncomingForm()
+    form.keepExtensions = true
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            return res.status(400).json({
+                error: "Image could not be uploaded."
+            })
+        }
+        let post = new Post(fields)
+        if (files.photo) {
+            post.photo.data = fs.readFileSync(files.photo.path)
+            post.photo.contentType = files.photo.type
+        }
+        let result;
+        (async () => {
+            result = await data.save();
         })
-        .catch((err) => {
+        if (err) {
             return res.status(400).json({
                 error: errorHandler(err)
             })
-        })
+        }
+        return res.json(result)
+    })
 }
+
 const Schema = mongoose.Schema;
 export const edit = (req, res) => {
     const id = req.params.id
