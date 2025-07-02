@@ -2,45 +2,67 @@ import { useState } from "react"
 import './createPost.css'
 
 const CreatePost = () => {
-    const [title, setTitle] = useState("")
-    const [body, setBody] = useState("")
-    const [isPostCreated, setIsPostCreated] = useState(false)
+    const [values, setValues] = useState({
+        title: "",
+        body: "",
+        photo: "",
+        isPostCreated: false,
+        formData: new FormData()
+    })
 
-    const createPostOnSubmit = async (event) => {
+    const {
+        title,
+        body,
+        isPostCreated,
+        formData
+    } = values
+
+    const createPostOnSubmit = async (event, post) => {
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8000/new-post`, {
+            const response = await fetch(`http://localhost:8000/posts/new-post`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ title: `${title}`, body: `${body}` })
+                body: post
             })
             const data = await response.json()
-            setIsPostCreated(true)
+            setValues({
+                ...values,
+                title: "",
+                body: "",
+                photo: "",
+                isPostCreated: true,
+            });
+            setValues({ ...values, title: data.title, formData: new FormData() });
         } catch (err) {
             console.error(err)
         }
-       if (!title || !body) {
-            setIsPostCreated(false)
-        } 
-    }
-    
-    const titleInputChange = (event) => {
-        setTitle(event.target.value)
+        if (!values.title || !values.body) {
+            setValues({ isPostCreated: false })
+        }
     }
 
-    const bodyInputChange = (event) => {
-        setBody(event.target.value)
-    }
+    const handleChange = (name) => (event) => {
+        const value = name === "photo" ? event.target.files[0] : event.target.value;
+        new formData.set(name, value);
+        setValues({ ...values, [name]: value });
+    };
 
     return (
         <div>
             <form id="add-post_form">
                 <h1>Add post!</h1>
-                <input type="text" name="title" value={title} placeholder="Title" onChange={titleInputChange} />
-                <textarea type="text" name="body" value={body} placeholder="Content" onChange={bodyInputChange}></textarea>
+                <input
+                    onChange={handleChange("photo")}
+                    type="file"
+                    name="photo"
+                    accept="image/*"
+                />
+                <input type="text" value={title} placeholder="Title" onChange={handleChange("title")} />
+                <textarea type="text" value={body} placeholder="Content" onChange={handleChange("body")}></textarea>
                 <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
-            {isPostCreated && <p>Your new post has been successfully published !</p>}
+            {values.isPostCreated && <p>Your new post has been successfully published !</p>}
         </div>
     )
 }
