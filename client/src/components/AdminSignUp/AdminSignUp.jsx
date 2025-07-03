@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import './adminSignUp.css'
+import './adminSignup.css'
 import { signup } from "../Auth";
 
 const AdminSignup = () => {
@@ -43,7 +43,7 @@ const AdminSignup = () => {
             });
     };
 
-    const signUpForm = () => (
+    const signupForm = () => (
         <form>
             <div className="form-group">
                 <label className="text-muted">Name</label>
@@ -94,9 +94,9 @@ const AdminSignup = () => {
         <div>
             {showSuccess()}
             {showError()}
-            {signUpForm()}
+            {signupForm()}
         </div>
     )
 }
 
-export default AdminSignUp
+export default AdminSignup

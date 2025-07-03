@@ -6,10 +6,10 @@ import EditPost from './components/EditPost/EditPost'
 import ReadPost from './components/ReadPost/ReadPost'
 import AdminDashboard from './components/AdminDashboard/AdminDashboard'
 import AdminLogin from './components/AdminLogin/AdminLogin'
-import AdminSignup from './components/AdminLogin/AdminSignup'
+import AdminSignup from './components/AdminSignup/AdminSignup'
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer'
-import AdminRoute from "./Auth/AdminRoute";
+import AdminRoute from "./components/Auth/AdminRoute";
 
 const AppRoutes = () => {
 

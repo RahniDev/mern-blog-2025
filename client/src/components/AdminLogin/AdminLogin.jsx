@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import './adminLogin.css'
 import { signin, authenticate, isAuthenticated } from "../Auth/index";
 
@@ -87,11 +87,11 @@ const AdminLogin = () => {
   const redirectUser = () => {
     if (redirectToReferrer) {
       if (user && user.role === 1) {
-        return <Redirect to="/admin-dashboard" />;
+        return <Navigate to="/admin-dashboard" />;
       }
 
       if (isAuthenticated()) {
-        return <Redirect to="/" />;
+        return <Navigate to="/" />;
       }
     };
 
