@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './adminDashboard.css'
+import { isAuthenticated } from "../Auth";
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
   const [redirect, setRedirect] = useState(false)
+
+   const {
+    user: { _id, name, email, role },
+  } = isAuthenticated();
 
   const getAllPosts = async () => {
     try {
@@ -82,7 +87,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <div className='admin-title-btn'><h1>Admin Dashboard</h1>
+      <div className='admin-title-btn'><h1>{role === 1 && "Admin"}  Dashboard</h1>
         <Link className="create-btn" to='/new-post'>Create Post</Link></div>
       <div className='post-count'><h4 className='post-count_header'>Total Posts</h4>
         <p className='post-count_btn'>{posts.length}</p></div>
