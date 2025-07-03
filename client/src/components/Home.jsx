@@ -1,4 +1,3 @@
-import Navbar from './Navbar/Navbar'
 import AllPosts from './AllPosts/AllPosts'
 
 const Home = () => {

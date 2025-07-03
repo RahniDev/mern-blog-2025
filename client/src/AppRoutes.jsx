@@ -7,6 +7,7 @@ import ReadPost from './components/ReadPost/ReadPost'
 import AdminDashboard from './components/AdminDashboard/AdminDashboard'
 import AdminLogin from './components/AdminLogin/AdminLogin'
 import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer'
 
 const AppRoutes = () => {
 
@@ -22,6 +23,7 @@ const AppRoutes = () => {
         <Route path='/:id/edit' element={<EditPost />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
       </Routes>
+      <Footer />
     </>
   )
 }
