@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import './adminSignUp.css'
 import { signup } from "../Auth";
 
-const AdminSignUp = () => {
+const AdminSignup = () => {
   const [values, setValues] = useState({
     name: "",
     email: "",
