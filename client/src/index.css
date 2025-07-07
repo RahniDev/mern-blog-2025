@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Satisfy&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #213547;
@@ -9,11 +10,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  margin: 0 auto;
+}
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Merriweather", serif;
 }
 
 button {
@@ -31,7 +36,17 @@ button:hover {
   border-color: #646cff;
     color: #747bff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.title {
+  font-family: "Satisfy", cursive;
+  font-weight: 400;
+  font-style: normal;
+  color: #673282;
+  margin-top: auto;
+  text-shadow: 5px 5px #92789f;
 }

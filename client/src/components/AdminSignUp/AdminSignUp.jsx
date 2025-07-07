@@ -23,9 +23,8 @@ const AdminSignup = () => {
         setValues({ ...values, error: false });
         signup({ name, email, password })
             .then((data) => {
-                console.log("++ data: ", data);
-                if (data.error) {
-                    setValues({ ...values, error: data.error, success: false });
+                if (error) {
+                    setValues({ ...values, error: error, success: false });
                 } else {
                     setValues({
                         ...values,
@@ -37,9 +36,8 @@ const AdminSignup = () => {
                     });
                 }
             })
-            .catch((exc) => {
-                console.error("++ exc: ", exc);
-                setValues({ ...values, error: exc.message, success: false });
+            .catch((error) => {
+                setValues({ ...values, error: error, success: false });
             });
     };
 

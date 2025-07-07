@@ -1,5 +1,5 @@
 #footer {
-    background-color: #c696e0;
+    background-color: #92789f;
     position: absolute;
     bottom: 0;
     padding: 1rem;
@@ -7,4 +7,13 @@
     justify-content: space-between;
     left: 0;
     right: 0;
+}
+
+#footer .icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons a {
+    padding: 0 .2em;
 }
