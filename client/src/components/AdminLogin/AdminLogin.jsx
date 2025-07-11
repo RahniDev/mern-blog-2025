@@ -25,8 +25,8 @@ const AdminLogin = () => {
     setValues({ ...values, error: false, loading: true });
     signin({ email, password })
       .then(data => {
-        if (data.error) {
-          setValues({ ...values, error: data.error, loading: false });
+        if (error) {
+          setValues({ ...values, error: error, loading: false });
         } else {
           authenticate(data, () => {
             setValues({
@@ -36,11 +36,12 @@ const AdminLogin = () => {
           });
         }
       })
-      .catch(exc => {
-        console.error("+++ exc signin: ", exc);
-        setValues({ ...values, error: exc.message, loading: false });
+      .catch(error => {
+        console.error(error);
+        setValues({ ...values, error: error, loading: false });
       });
   };
+  
   const loginForm = () => (
     <form>
       <div className="form-group">

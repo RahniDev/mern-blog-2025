@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { createHmac } = require('node:crypto');
 const uuidv1 = require('uuidv1')
 
-const userSchema = new mongoose.Schema ({
+const userSchema = new mongoose.Schema({
 name: {
 type: String,
 trim: true,
@@ -18,10 +18,6 @@ email: {
 hashed_password: {
     type: String,
     required: true,
-},
-about: {
-    type: String,
-    trim: true,
 },
 salt: String,
 role: {

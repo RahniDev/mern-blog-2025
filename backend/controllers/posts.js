@@ -5,7 +5,6 @@ import * as formidable from 'formidable';
 import fs from 'fs'
 
 export const read = (req, res) => {
-    console.log(req.post)
     return res.json(req.post)
 }
 

@@ -4,37 +4,37 @@ import './adminSignup.css'
 import { signup } from "../Auth";
 
 const AdminSignup = () => {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    error: "",
-    success: false,
-  });
+    const [values, setValues] = useState({
+        name: "",
+        email: "",
+        password: "",
+        error: "",
+        success: false,
+    });
 
-  const { name, email, password, success, error } = values;
+    const { name, email, password, success, error } = values;
 
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, error: false, [name]: event.target.value });
-  };
+    const handleChange = (name) => (event) => {
+        setValues({ ...values, error: false, [name]: event.target.value });
+    };
 
     const clickSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: false });
-        signup({ name, email, password })
+        const user = { name: 'rfytyu', email: 'fg@rt.com', password: 'ajinkj' }
+        return fetch('http://localhost:8000/signup', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(response => {
+                return response.json();
+            })
             .then((data) => {
-                if (error) {
-                    setValues({ ...values, error: error, success: false });
-                } else {
-                    setValues({
-                        ...values,
-                        name: "",
-                        email: "",
-                        password: "",
-                        error: "",
-                        success: true,
-                    });
-                }
+                console.log(data)
             })
             .catch((error) => {
                 setValues({ ...values, error: error, success: false });

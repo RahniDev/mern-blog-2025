@@ -2,7 +2,6 @@ export const signup = user => {
     return fetch('http://localhost:8000/signup', {
         method: 'POST',
         headers: {
-            Accept: 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
@@ -10,6 +9,7 @@ export const signup = user => {
         .then(response => {
             return response.json();
         })
+        .then(data => console.log(data))
         .catch(err => {
             console.log(err);
         });

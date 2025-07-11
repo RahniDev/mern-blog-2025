@@ -1,6 +1,7 @@
-const User = require('../models/user');
+import User from "../models/User.js"
 
-exports.userById = (req, res, next, id) => {
+
+export const userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
@@ -12,7 +13,7 @@ exports.userById = (req, res, next, id) => {
     });
 };
 
-exports.read = (req, res) => {
+export const read = (req, res) => {
     req.profile.hashed_password = undefined;
     req.profile.salt = undefined;
     return res.json(req.profile);
