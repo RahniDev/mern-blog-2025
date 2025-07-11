@@ -1,6 +1,6 @@
 import logo from '../../assets/logo.jpg'
 import { Link } from 'react-router-dom'
-import { isAuthenticated } from "../AdminLogin/index";
+import { isAuthenticated } from "../Auth/index";
 import './navbar.css'
 
 const Navbar = () => {

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import './adminSignup.css'
-import { signup } from "../Auth";
 
 const AdminSignup = () => {
     const [values, setValues] = useState({
@@ -21,7 +20,7 @@ const AdminSignup = () => {
     const clickSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: false });
-        const user = { name: 'rfytyu', email: 'fg@rt.com', password: 'ajinkj' }
+        const user = { name: name, email: email, password: password }
         return fetch('http://localhost:8000/signup', {
             method: 'POST',
             headers: {
@@ -82,17 +81,17 @@ const AdminSignup = () => {
         <div>{error}</div>
     );
 
-    const showSuccess = () => (
-        <div>
-            New account is created. Please <Link to="/login">Log In</Link>
-        </div>
-    );
+    const showSuccess = () => (<div>
+        Your account was successfully created. Please <Link to="/admin-login">Log In</Link>
+    </div>
+    )
 
     return (
-        <div>
-            {showSuccess()}
-            {showError()}
+        <div id="signup-page">
+            <h2>Sign Up</h2>
             {signupForm()}
+            {showError()}
+            {showSuccess()}
         </div>
     )
 }

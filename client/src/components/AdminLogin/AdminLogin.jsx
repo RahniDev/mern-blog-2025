@@ -85,16 +85,18 @@ const AdminLogin = () => {
       </div>
     );
 
-  const redirectUser = () => {
+   const redirectUser = () => {
     if (redirectToReferrer) {
       if (user && user.role === 1) {
         return <Navigate to="/admin-dashboard" />;
-      }
-
-      if (isAuthenticated()) {
+      } else {
         return <Navigate to="/" />;
       }
-    };
+    }
+    if (isAuthenticated()) {
+      return <Navigate to="/" />;
+    }
+  };
 
     return (
       <div>
@@ -105,6 +107,5 @@ const AdminLogin = () => {
       </div>
     );
   };
-}
 
 export default AdminLogin
