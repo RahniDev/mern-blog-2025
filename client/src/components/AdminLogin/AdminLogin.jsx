@@ -8,11 +8,10 @@ const AdminLogin = () => {
     email: "email@gmail.com",
     password: "password",
     error: "",
-    loading: false,
     redirectToReferrer: false,
   });
 
-  const { email, password, loading, error, redirectToReferrer } = values;
+  const { email, password, error, redirectToReferrer } = values;
   const { user } = isAuthenticated();
 
   // higher order function
@@ -22,11 +21,11 @@ const AdminLogin = () => {
 
   const clickSubmit = event => {
     event.preventDefault();
-    setValues({ ...values, error: false, loading: true });
+    setValues({ ...values, error: false });
     signin({ email, password })
-      .then(data => {
+            .then((data) => {
         if (error) {
-          setValues({ ...values, error: error, loading: false });
+          setValues({ ...values, error: error });
         } else {
           authenticate(data, () => {
             setValues({
@@ -38,7 +37,7 @@ const AdminLogin = () => {
       })
       .catch(error => {
         console.error(error);
-        setValues({ ...values, error: error, loading: false });
+        setValues({ ...values, error: error });
       });
   };
   
@@ -78,29 +77,18 @@ const AdminLogin = () => {
     </div>
   );
 
-  const showLoading = () =>
-    loading && (
-      <div className="alert alert-info">
-        <h2>Loading...</h2>
-      </div>
-    );
-
    const redirectUser = () => {
     if (redirectToReferrer) {
-      if (user && user.role === 1) {
+      if (user && user.role === 0) {
         return <Navigate to="/admin-dashboard" />;
       } else {
-        return <Navigate to="/" />;
+        return <Navigate to="/admin-login" />;
       }
-    }
-    if (isAuthenticated()) {
-      return <Navigate to="/" />;
     }
   };
 
     return (
       <div>
-        {showLoading()}
         {showError()}
         {loginForm()}
         {redirectUser()}
