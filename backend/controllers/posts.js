@@ -24,32 +24,64 @@ export const readBySlug = (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err))
 }
 
-export const create = (req, res, next) => {
-    let form = new formidable.IncomingForm()
+// first parse multipart request with formidable
+export const parseMultiReq = async (req, res, next) => {
+
+    const form = new formidable.IncomingForm()
     form.keepExtensions = true
-    form.parse(req, (err, fields, files) => {
-        if (err) {
-            return res.status(400).json({
-                error: "Image could not be uploaded."
-            })
-        }
+
+    // us promise, could add try..catch
+    const [fields, files] = await form.parse(req);
+
+    // now populate body for validator and file handler
+    req.body = fields;
+    req.files = files;
+
+    next();
+}
+
+export const create = (req, res) => {
+    // let form = new formidable.IncomingForm()
+    // form.keepExtensions = true
+        // if (err) {
+        //     return res.status(400).json({
+        //         error: "Image could not be uploaded."
+        //     })
+        // }
+        console.log('field: ', fields)
+        // const { title, body } = fields
+        // if (!title || !body) {
+        //     return res.status(400).json({
+        //         error: "All fields are required"
+        //     })
+        // }
         let post = new Post(fields)
         if (files.photo) {
-            post.photo.data = fs.readFileSync(files.photo.path)
+            const photoFilePath = files.photo.map((file) => {
+                return file.filepath
+            })
+        
+            if (files.photo.size > 1000000) {
+                return res.status(400).json({
+                    error: "Image should be less than 1MB in size."
+                })
+            }
+            const photoStr = photoFilePath.toString()
+            post.photo.data = fs.readFileSync(photoStr)
+            // post.photo.data = fs.readFileSync(files.photo.toString())
             post.photo.contentType = files.photo.type
         }
-        let result;
-        (async () => {
-            result = await data.save();
-        })
-        if (err) {
-            return res.status(400).json({
-                error: errorHandler(err)
+        post.save()
+            .then((result) => {
+               return res.json(result)
             })
-        }
-        return res.json(result)
-    })
-}
+            .catch((err) => {
+                console.log(err)
+                // return res.status(400).json({
+                //     error: errorHandler(err)
+                // })
+            })
+    }
 
 const Schema = mongoose.Schema;
 export const edit = (req, res) => {

@@ -11,10 +11,10 @@ const Footer = () => {
         <div id='footer'>
             <p>{`© ${year}. All Rights Reserved.`}</p>
             <div className="icons">
-                <a href="https://www.instagram.com/yuzu.wellness_/"><InstagramIcon /></a>
-                <a href="https://www.pinterest.com/yuzuwellness/"><PinterestIcon /></a>
-                 <a href="https://x.com/YuzuWellness"><XIcon /></a>
-                 <a href="https://www.facebook.com/profile.php?id=61577953778367"><FacebookIcon /></a>
+                <a href="/"><InstagramIcon /></a>
+                <a href="/"><PinterestIcon /></a>
+                 <a href="/"><XIcon /></a>
+                 <a href="/"><FacebookIcon /></a>
             </div>
         </div>
     )

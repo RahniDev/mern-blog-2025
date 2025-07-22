@@ -6,9 +6,9 @@ import './navbar.css'
 const Navbar = () => {
   return (
     <nav className='nav'>
-      <a className="logo" href="/"><img src={logo} alt="Yuzu Wellness Logo"
+      <a className="logo" href="/"><img src={logo} alt="Crypto Blog Logo"
       width="80px" /></a>
-      <h1 className='title'>Yuzu Wellness</h1>
+      <h1 className='title'>Crypto Blog</h1>
       <ul>
       </ul>
     </nav>

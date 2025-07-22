@@ -3,15 +3,16 @@ const router = express.Router()
 
 const {
     list,
-    create, 
+    parseMultiReq,
+    create,
     readBySlug,
     edit,
-    deletePost,
+    deletePost
 } = require("../controllers/posts")
 
 router.get("/", list)
 router.get("/:slug/:id", readBySlug)
-router.post("/new-post", create)
+router.post("/new-post", parseMultiReq, create)
 router.put("/:id/edit", edit)
 router.delete("/:id", (deletePost))
 

@@ -18,7 +18,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  font-family: "Merriweather", serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 button {
@@ -32,9 +32,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
-    color: #747bff;
+  color: #747bff;
 }
 
 button:focus,

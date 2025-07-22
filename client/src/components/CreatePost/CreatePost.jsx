@@ -1,5 +1,7 @@
 import { useState } from "react"
 import './createPost.css'
+import { isAuthenticated } from "../Auth/index";
+import { createPost } from "./index"
 
 const CreatePost = () => {
     const [values, setValues] = useState({
@@ -9,47 +11,43 @@ const CreatePost = () => {
         isPostCreated: false,
         formData: new FormData()
     })
-
+    const { user, token } = isAuthenticated();
     const {
         title,
         body,
+        photo,
         isPostCreated,
         formData
     } = values
 
-    const createPostOnSubmit = async (event, post) => {
-        event.preventDefault();
-        try {
-            const response = await fetch(`http://localhost:8000/posts/new-post`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: post
-            })
-            const data = await response.json()
-            setValues({
-                ...values,
-                title: "",
-                body: "",
-                photo: "",
-                isPostCreated: true,
-            });
-            setValues({ ...values, title: data.title, formData: new FormData() });
-        } catch (err) {
-            console.error(err)
-        }
-        if (!values.title || !values.body) {
-            setValues({ isPostCreated: false })
-        }
-    }
+    const createPostOnSubmit = e => {
+        e.preventDefault();
+            setValues({ ...values, error: "" });
+        createPost(token, formData).then((data) => {
+            if (data.error) {
+                setValues({ ...values, error: data.error });
+                console.error('ERROR: ', data.error)
+            } else {
+                setValues({
+                    ...values,
+                    title: "",
+                    body: "",
+                    photo: "",
+                    isPostCreated: true,
+                });
+                setValues({ ...values, formData: new FormData() });
+            }
+        });
+    };
 
     const handleChange = (name) => (event) => {
         const value = name === "photo" ? event.target.files[0] : event.target.value;
-        new formData.set(name, value);
+        formData.set(name, value);
         setValues({ ...values, [name]: value });
     };
 
     return (
-        <div>
+        <>
             <form id="add-post_form">
                 <h1>Add post!</h1>
                 <input
@@ -63,7 +61,7 @@ const CreatePost = () => {
                 <button type="submit" onClick={createPostOnSubmit}>Create</button>
             </form>
             {values.isPostCreated && <p>Your new post has been successfully published !</p>}
-        </div>
+        </>
     )
 }
 
