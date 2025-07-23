@@ -23,10 +23,9 @@ const CreatePost = () => {
     const createPostOnSubmit = e => {
         e.preventDefault();
             setValues({ ...values, error: "" });
-        createPost(token, formData).then((data) => {
-            if (data.error) {
-                setValues({ ...values, error: data.error });
-                console.error('ERROR: ', data.error)
+        createPost(token, formData).then((error) => {
+            if (error) {
+                setValues({ ...values, error: error });
             } else {
                 setValues({
                     ...values,
