@@ -20,14 +20,15 @@ const AllPosts = () => {
   }, [])
 
   return (
-    <div className='all-posts'>
+    <section className='all-posts'>
         {allPosts && allPosts.map((post) =>
           <Link className="grid_single-post" key={post._id} to={`/${post.slug}/${post._id}`}><div key={post._id}>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
+            {post.photo && <img src={post.imageUrl} alt={post.title} style={{ width: '100%', height: 'auto' }} />}
           </div></Link>
         )}
-    </div>
+    </section>
   )
 }
 

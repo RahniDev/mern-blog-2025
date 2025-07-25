@@ -18,7 +18,9 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  font-family: "Open Sans", sans-serif;
+  color: #F0F0F0;
+  font-family: "DM Sans", sans-serif;
+  background: linear-gradient(to right, #1a1a2e, #16213e);
 }
 
 button {
@@ -38,16 +40,68 @@ button:hover {
   color: #747bff;
 }
 
+a {
+  color: #F0F0F0;
+}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
 .title {
-  font-family: "Satisfy", cursive;
+  font-family: "Orbitron", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: #673282;
+  text-transform: uppercase;
   margin-top: auto;
-  text-shadow: 5px 5px #92789f;
+}
+
+#hero {
+  display: flex;
+  justify-content: end;
+}
+
+#hero h1 {
+  font-size: 4.5rem;
+  width: 40%;
+  color: transparent;
+  background-clip: text;
+  background-size: 200%;
+  margin: auto;
+  background-image: url('./assets/masked-text.png');
+  background-position: 0 50%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate-background 5s infinite alternate linear;
+}
+
+#hero img {
+  border-radius: 10%;
+  margin-top: -100px;
+}
+
+@keyframes animate-background {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 50% 40%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #hero h1 {
+    width: 90%;
+    font-size: 58px;
+  }
+  #hero img {
+    display: none;
+  }
 }

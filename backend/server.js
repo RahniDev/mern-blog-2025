@@ -26,13 +26,6 @@ if (!fs.existsSync(uploadDir)) {
 const app = express()
 
 
-app.use(formidable({
-   multiples: true,
-   uploadDir: uploadDir,
-   keepExtensions: true,
-}));
-
-
 const corsOptions = {
  origin: 'http://localhost:5173',
  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -40,8 +33,13 @@ const corsOptions = {
  credentials: true,
 };
 
-
 app.use(cors(corsOptions));
+
+app.use(formidable({
+   multiples: true,
+   uploadDir: uploadDir,
+   keepExtensions: true,
+}));
 
 
 mongoose.connect(process.env.DB)

@@ -1,37 +1,80 @@
 .all-posts {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3%;
     padding: 2rem 3rem;
+    margin-top: 10px;
 }
 
 .all-posts h2 {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 26px;
 }
 
 a {
-    color: black;
     text-decoration: none;
 }
 
 .all-posts p {
-    font-size: 14px;
-    color: rgb(74, 74, 74);
+    font-size: 16px;
+    color: white;
 }
 
-.grid_single-post {
-    border-bottom: 1px solid #92789f;
+.all-posts a {
+    width: 75%;
+    height: 360px;
+    background: rgba(37, 37, 60, 0.7);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    border-radius: 20px;
+   border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 14px 7px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.all-posts a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.8),
+            transparent);
+}
+
+.all-posts a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.8),
+            transparent,
+            rgba(255, 255, 255, 0.3));
 }
 
 @media only screen and (max-width: 768px) {
     .all-posts {
-         grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media only screen and (max-width: 600px) {
-      .all-posts {
-         grid-template-columns: repeat(1, 1fr);
+    .all-posts {
+        grid-template-columns: repeat(1, 1fr);
     }
-} 
+    .all-posts a {
+        width: 100%;
+    }
+}

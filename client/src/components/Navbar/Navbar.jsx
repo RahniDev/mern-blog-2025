@@ -7,8 +7,7 @@ const Navbar = () => {
   return (
     <nav className='nav'>
       <a className="logo" href="/"><img src={logo} alt="Crypto Blog Logo"
-      width="80px" /></a>
-      <h1 className='title'>Crypto Blog</h1>
+      width="90px" /></a>
       <ul>
       </ul>
     </nav>
