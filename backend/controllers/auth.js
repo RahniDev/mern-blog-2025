@@ -23,31 +23,36 @@ export const signup = async (req, res) => {
 
 
 export const signin = (req, res) => {
-   const { email, password } = req.body;
+    if (!req.body.email || !req.body.password) {
+        return res.status(400).json({ error: 'Email and password are required.' })
+    }
+    const { email, password } = req.body;
+
     User.findOne({ email })
-    .then((user) => {
-  // generate a signed token with user id and secret
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-        // persist the token as 't' in cookie with expiry date
-        res.cookie('t', token, { expire: new Date() + 9999 });
-        // return response with user and token to frontend client
-        const { _id, name, email, role } = user;
-        return res.json({ token, user: { _id, email, name, role } });
-    })
-    .catch((err, user) => {
-        if (err || !user) {
-            return res.status(400).json({
-                error: 'User with that email does not exist. Please signup'
-            });
-        }
-        // if user is found, make sure the email and password match
-        // create authenticate method in user model
-        if (!user.authenticate(password)) {
-            return res.status(401).json({
-                error: 'Email and password dont match'
-            });
-        }
-    })
+        .then((user) => {
+            if (!user) {
+                return res.status(400).json({
+                    error: 'User with that email does not exist. Please signup'
+                });
+            }
+            if (!user.authenticate(password)) {
+                return res.status(401).json({
+                    error: 'Email and password don\'t match'
+                });
+            }
+            // generate a signed token with user id and secret
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+            // persist the token as 't' in cookie with expiry date
+            res.cookie('t', token, { expire: new Date() + 9999 });
+            // return response with user and token to frontend client
+            const { _id, name, email, role } = user;
+            return res.json({ token, user: { _id, email, name, role } });
+        })
+        .catch((err) => {
+            return res.status(500).json({
+                error: 'Server error. Please try again later.'
+            })
+        })
 };
 
 export const signout = (req, res) => {

@@ -35,7 +35,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(formidable({
+app.use('/posts', formidable({
    multiples: true,
    uploadDir: uploadDir,
    keepExtensions: true,
