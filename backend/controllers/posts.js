@@ -24,28 +24,29 @@ export const read = (req, res) => {
 }
 
 export const getImage = (req, res) => {
-    const { postId } = req.params;
+ const { postId } = req.params;
 
-    Post.findById(postId)
-        .select('photo')
-        .exec((err, post) => {
-            if (err || !post) {
-                return res.status(404).json({
-                    error: 'Post or image not found',
-                });
-            }
+  Post.findById(postId)
+    .select('photo')
+    .exec()
+    .then((post) => {
+      if (!post || !post.photo || !post.photo.data) {
+        return res.status(404).json({ error: 'Image not found' });
+      }
 
-            res.set('Access-Control-Allow-Origin', '*');  // Allow all origins (or restrict to your frontend URL)
-            res.set('Content-Type', post.photo.contentType);  // Set the MIME type of the image
-            res.send(post.photo.data);  // Send binary data as the image
-        });
+      res.set('Content-Type', post.photo.contentType);
+      return res.send(post.photo.data);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    });
 };
 
 export const readById = (req, res) => {
     const id = req.params.id
     Post.findById(id)
-        .select('photo')
-        .then((post) => console.log(post))
+        .then((post) => res.json(post))
         .catch((err) => res.status(400).json("Error: " + err))
 }
 
