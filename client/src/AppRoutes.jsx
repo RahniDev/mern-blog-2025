@@ -22,7 +22,7 @@ const AppRoutes = () => {
         <Route path="/admin-login" element={<AdminLogin />} />
         {/* only authenticated admin can access */}
         <Route path='/new-post' element={<AdminRoute><CreatePost /></AdminRoute>} />
-        <Route path='/:id/edit' element={<AdminRoute><EditPost /></AdminRoute>} />
+        <Route path='/:slug/:id/edit' element={<AdminRoute><EditPost /></AdminRoute>} />
         <Route path="/admin-dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
       </Routes>
       <Footer />

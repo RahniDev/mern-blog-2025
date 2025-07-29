@@ -1,9 +1,9 @@
-const express = require('express')
+import express from 'express'
 const router = express.Router()
 
-const { requireSignin, isAuth, isAdmin } = require('../controllers/auth')
+import { requireSignin, isAuth, isAdmin } from '../controllers/auth.js' 
 
-const { userById, read } = require('../controllers/user')
+import { userById, read } from '../controllers/user.js'
 
 router.get('/secret/:userId', requireSignin, isAuth, isAdmin, (req, res) => {
     res.json({
@@ -15,4 +15,4 @@ router.get('/user/:userId', requireSignin, isAuth, read)
 
 router.param('userId', userById)
 
-module.exports = router
+export default router

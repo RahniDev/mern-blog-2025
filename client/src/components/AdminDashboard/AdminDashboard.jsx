@@ -64,7 +64,7 @@ const AdminDashboard = () => {
           <div className='post_buttons'>
             <Link
               className="mypost_btn edit_btn"
-              to={`/${post._id}/edit`}>
+              to={`/${post.slug}/${post._id}/edit`}>
               Edit
             </Link>
             {post ? (

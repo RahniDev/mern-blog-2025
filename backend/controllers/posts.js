@@ -5,6 +5,20 @@ import * as formidable from 'formidable';
 import fs from 'fs'
 
 
+export const list = (req, res) => {
+    const sort = { title: 1 }
+    Post.find()
+        .sort(sort)
+        .then((posts) => {
+            const postsWithImageUrls = posts.map(post => {
+                const imageUrl = post.photo ? `http://localhost:8000/post/photo/${post._id}` : null;
+                return { ...post.toObject(), imageUrl };
+            }
+            );
+            res.json(postsWithImageUrls);
+        })
+        .catch((err) => res.status(400).json("Error: " + err))
+}
 export const read = (req, res) => {
     return res.json(req.post)
 }
@@ -27,43 +41,22 @@ export const getImage = (req, res) => {
         });
 };
 
-export const list = (req, res) => {
-    const sort = { title: 1 }
-    Post.find()
-        .sort(sort)
-        .then((posts) => {
-            const postsWithImageUrls = posts.map(post => {
-                const imageUrl = post.photo ? `http://localhost:8000/post/photo/${post._id}` : null;
-                return { ...post.toObject(), imageUrl }; 
-            }
-            );
-            res.json(postsWithImageUrls);
-        })
-        .catch((err) => res.status(400).json("Error: " + err))
-}
-
-
-export const readBySlug = (req, res) => {
+export const readById = (req, res) => {
     const id = req.params.id
-    const slug = req.params.slug
     Post.findById(id)
         .select('photo')
-        .then((post) => res.json(post))
+        .then((post) => console.log(post))
         .catch((err) => res.status(400).json("Error: " + err))
 }
-
 
 export const create = (req, res) => {
     const { fields, files } = req;
-    // console.log('Fields:', fields);
-    // console.log('Files:', files);
-    const post = new Post(fields);
 
+    const post = new Post(fields);
 
     if (files && files.photo) {
         const photoFilePath = files.photo.path;
         const photoSize = files.photo.size;
-
 
         if (photoSize > 1000000) {
             return res.status(400).json({
@@ -71,11 +64,9 @@ export const create = (req, res) => {
             });
         }
 
-
         post.photo.data = fs.readFileSync(photoFilePath);
         post.photo.contentType = files.photo.type;  // Set the MIME type of the image
     }
-
 
     post.save()
         .then((result) => {
@@ -91,13 +82,13 @@ export const create = (req, res) => {
 };
 
 
-const Schema = mongoose.Schema;
+
 export const edit = (req, res) => {
     const id = req.params.id
-    if (!Schema.Types.ObjectID.isValid(id))
+    if (!mongoose.isValidObjectId(id)) {
         return res.status(400).send(`No post with given id: ${id}`)
+    }
     const { title, body } = req.body
-
 
     const updatedPost = { title, body }
     Post.findByIdAndUpdate(
@@ -111,7 +102,6 @@ export const edit = (req, res) => {
                 return error
             } else {
                 res.send(data)
-                console.log(data)
             }
         }
     )

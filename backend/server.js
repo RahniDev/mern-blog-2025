@@ -4,21 +4,16 @@ import cors from 'cors'
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
-import formidable from 'express-formidable';
-import path from 'path'; // To ensure cross-platform path handling
+import path from 'path';
 import { fileURLToPath } from 'url';  // To get current file path
 import fs from 'fs'
 
-
 dotenv.config()
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 const uploadDir = path.join(__dirname, 'imgUploads');
-
 
 if (!fs.existsSync(uploadDir)) {
    fs.mkdirSync(uploadDir);
@@ -34,12 +29,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-app.use('/posts', formidable({
-   multiples: true,
-   uploadDir: uploadDir,
-   keepExtensions: true,
-}));
 
 
 mongoose.connect(process.env.DB)
