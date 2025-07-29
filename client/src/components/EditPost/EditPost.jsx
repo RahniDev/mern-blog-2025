@@ -30,7 +30,6 @@ const EditPost = () => {
 
   useEffect(() => {
     getSinglePost(params.slug, params.id)
-    console.log('POST', post, values)
   }, [])
 
   useEffect(() => {
@@ -39,27 +38,28 @@ const EditPost = () => {
   }, [values.title, values.body]);
 
   const editPost = async () => {
+    const formData = new FormData();
+    formData.append("title", post.title || "");
+    formData.append("body", post.body || "");
+    if (values.photo) {
+      formData.append("photo", values.photo);
+    }
     try {
-      const response = await fetch(`http://localhost:8000/posts/${params.id}/edit`, {
+      const response = await fetch(`/posts/${params.id}/edit`, {
         method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(post),
+        body: formData
       })
+
       const data = await response.json()
       setValues({
         ...values,
-        title: data.title,
-        body: data.body,
         updatedPost: data.title,
         error: "",
       });
-      console.log(data);
+      return data
     } catch (err) {
       console.error(err)
-      setValues({ ...values, error: err });
+      setValues({ ...values, error: "Failed to update post." });
     }
   }
 
@@ -71,11 +71,19 @@ const EditPost = () => {
     event.preventDefault();
     setValues({ ...values, error: "" });
     setPost({ title: values.title, body: values.body });
-     editPost()
+    editPost()
   };
 
   const newPostForm = () => (
     <form className="newpost_form" onSubmit={clickSubmit}>
+      <div className="form-group">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setValues({ ...values, photo: e.target.files[0] })}
+          className="newpost_field"
+        />
+      </div>
       <div className="form-group">
         <input
           onChange={handleChange("title")}

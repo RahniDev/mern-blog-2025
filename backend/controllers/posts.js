@@ -1,7 +1,7 @@
 import Post from "../models/Post.js"
 import mongoose from "mongoose"
 import { errorHandler } from "../helpers/dbErrorHandler.js";
-import * as formidable from 'formidable';
+import formidable from 'formidable';
 import fs from 'fs'
 
 
@@ -24,23 +24,23 @@ export const read = (req, res) => {
 }
 
 export const getImage = (req, res) => {
- const { postId } = req.params;
+    const { postId } = req.params;
 
-  Post.findById(postId)
-    .select('photo')
-    .exec()
-    .then((post) => {
-      if (!post || !post.photo || !post.photo.data) {
-        return res.status(404).json({ error: 'Image not found' });
-      }
+    Post.findById(postId)
+        .select('photo')
+        .exec()
+        .then((post) => {
+            if (!post || !post.photo || !post.photo.data) {
+                return res.status(404).json({ error: 'Image not found' });
+            }
 
-      res.set('Content-Type', post.photo.contentType);
-      return res.send(post.photo.data);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({ error: 'Something went wrong' });
-    });
+            res.set('Content-Type', post.photo.contentType);
+            return res.send(post.photo.data);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ error: 'Something went wrong' });
+        });
 };
 
 export const readById = (req, res) => {
@@ -85,29 +85,47 @@ export const create = (req, res) => {
 
 
 export const edit = (req, res) => {
-    const id = req.params.id
-    if (!mongoose.isValidObjectId(id)) {
-        return res.status(400).send(`No post with given id: ${id}`)
-    }
-    const { title, body } = req.body
+    const form = formidable({ multiples: false });
 
-    const updatedPost = { title, body }
-    Post.findByIdAndUpdate(
-        id,
-        {
-            $set: updatedPost,
-        },
-        { new: true },
-        (error, data) => {
-            if (error) {
-                return error
-            } else {
-                res.send(data)
-            }
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            console.error("Form parsing error:", err);
+            return res.status(400).json({ error: "Image could not be uploaded" });
         }
-    )
-}
 
+        const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
+        const body = Array.isArray(fields.body) ? fields.body[0] : fields.body;
+
+        const updatedPost = { title, body };
+
+        if (files.photo && files.photo.length > 0) {
+            const photo = files.photo[0];
+            const photoSize = photo.size;
+
+            if (photoSize > 1_000_000) {
+                return res.status(400).json({ error: "Image should be less than 1MB" });
+            }
+
+            updatedPost.photo = {
+                data: fs.readFileSync(photo.filepath),
+                contentType: photo.mimetype
+            };
+        }
+
+        Post.findByIdAndUpdate(
+            req.params.id,
+            { $set: updatedPost },
+            { new: true })
+            .then((result) => {
+                return res.json(result);
+            })
+            .catch((error) => {
+                console.error("Error updating post:", error);
+                return res.status(400).json({ error: "Failed to update post" });
+            })
+    }
+    );
+};
 
 export const deletePost = (req, res) => {
     Post.deleteOne({ _id: req.params.id })
