@@ -26,7 +26,7 @@ const app = express()
 
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? 'https://your-frontend. .app' 
+    ? 'https://mern-blog-2025.onrender.com' 
     : 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
