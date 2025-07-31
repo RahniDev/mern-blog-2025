@@ -1,3 +1,7 @@
+#admin-dashboard {
+    padding: 0 20px;
+}
+
 .post-count {
     text-align: left;
 }
@@ -15,9 +19,11 @@
     display: flex;
     justify-content: space-between;
 }
+
 .mypost a {
     text-decoration: underline;
 }
+
 .mypost .post_buttons .edit_btn {
     padding-right: 10px;
 }

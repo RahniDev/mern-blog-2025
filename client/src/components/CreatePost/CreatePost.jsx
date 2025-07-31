@@ -11,7 +11,7 @@ const CreatePost = () => {
         isPostCreated: false,
         formData: new FormData()
     })
-    const { user, token } = isAuthenticated();
+    const { token } = isAuthenticated();
     const {
         title,
         body,

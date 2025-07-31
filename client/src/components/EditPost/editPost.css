@@ -1,0 +1,17 @@
+#edit-post_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#edit-post_form .form-group {
+    width: 60%;
+}
+#edit-post_form input, #edit-post_form textarea {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#edit-post_form textarea {
+    height: 250px;
+}

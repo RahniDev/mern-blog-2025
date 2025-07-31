@@ -86,7 +86,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
+    <div id="admin-dashboard">
       <div className='admin-title-btn'><h1>{role === 1 && "Admin"}  Dashboard</h1>
         <Link className="create-btn" to='/new-post'>Create Post</Link></div>
       <div className='post-count'><h4 className='post-count_header'>Total Posts</h4>

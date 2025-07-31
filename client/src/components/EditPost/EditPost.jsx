@@ -75,7 +75,7 @@ const EditPost = () => {
   };
 
   const newPostForm = () => (
-    <form className="newpost_form" onSubmit={clickSubmit}>
+    <form id="edit-post_form" onSubmit={clickSubmit}>
       <div className="form-group">
         <input
           type="file"

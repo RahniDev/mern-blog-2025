@@ -39,7 +39,7 @@ const ReadPost = () => {
 
   return (
     <div className="post">
-      {postImage && <img src={postImage} alt="Post" width={500} />}
+      {postImage && <img src={postImage} alt="Post" width='100%' />}
       <h1>{post.title}</h1>
       <p>{post.body}</p>
     </div>
