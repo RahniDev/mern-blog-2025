@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <section id="hero">
-        <h1>Decentralize Your Ideas.</h1>
+        <h1>All Things Crypto.</h1>
       <img id="heroImg" src={heroImg} alt="Blockchain Image" width="40%" />
       </section>
       <AllPosts />

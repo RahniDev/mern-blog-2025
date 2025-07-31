@@ -125,7 +125,6 @@ const EditPost = () => {
       <div className="newpost_container">
         {showError()}
         {newPostForm()}
-        edit
         {showSuccess()}
       </div>
     </>

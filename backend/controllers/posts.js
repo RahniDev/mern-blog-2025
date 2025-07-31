@@ -6,12 +6,13 @@ import fs from 'fs'
 
 
 export const list = (req, res) => {
+    
     const sort = { title: 1 }
     Post.find()
         .sort(sort)
         .then((posts) => {
             const postsWithImageUrls = posts.map(post => {
-                const imageUrl = post.photo ? `http://localhost:8000/post/photo/${post._id}` : null;
+                const imageUrl = post.photo ? `http://localhost:8000/posts/post/photo/${post._id}` : null;
                 return { ...post.toObject(), imageUrl };
             }
             );
