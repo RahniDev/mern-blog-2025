@@ -5,8 +5,11 @@ const Home = () => {
   return (
     <div>
       <section id="hero">
-        <h1>All Things Crypto.</h1>
-      <img id="heroImg" src={heroImg} alt="Blockchain Image" width="40%" />
+        <div className='text-container'>
+          <h1>All Things Crypto.</h1>
+          <p className="subtitle">Dive into the world of DeFi, NFTs, and blockchain tech.</p>
+        </div>
+        <img id="heroImg" src={heroImg} alt="Blockchain Illustration" width="40%" />
       </section>
       <AllPosts />
     </div>

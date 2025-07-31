@@ -59,12 +59,15 @@ button:focus-visible {
 
 #hero {
   display: flex;
-  justify-content: end;
+  justify-content: space-around;
+}
+
+#hero .text-container {
+  margin: auto;
 }
 
 #hero h1 {
   font-size: 4.5rem;
-  width: 40%;
   color: transparent;
   background-clip: text;
   background-size: 200%;
@@ -80,6 +83,10 @@ button:focus-visible {
 #hero img {
   border-radius: 10%;
   margin-top: -100px;
+}
+
+.subtitle {
+  font-size: 1.25rem;
 }
 
 @keyframes animate-background {
@@ -98,9 +105,14 @@ button:focus-visible {
 
 @media only screen and (max-width: 768px) {
   #hero h1 {
-    width: 90%;
-    font-size: 58px;
+    width: 100%;
+    font-size: 3.5rem;
   }
+
+  #hero .text-container {
+    text-align: center;
+  }
+
   #hero img {
     display: none;
   }

@@ -37,7 +37,7 @@ const AllPosts = () => {
               />
             )}
             <h2>{post.title}</h2>
-            <p>{post.body}</p>
+            <p>{post.body.slice(0, 100)}...</p>
           </div></Link>
         )}
     </section>
