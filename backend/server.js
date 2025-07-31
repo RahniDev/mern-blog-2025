@@ -27,10 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 
-mongoose.connect(process.env.DB, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.DB)
 mongoose.connection
   .once("open", () => console.log("DB Connected!"))
   .on("error", (error) => console.log("DB Error:", error))
