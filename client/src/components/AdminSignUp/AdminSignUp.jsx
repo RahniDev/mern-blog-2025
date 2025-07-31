@@ -10,6 +10,7 @@ const AdminSignup = () => {
         error: "",
         success: false,
     });
+    const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
 
     const { name, email, password, success, error } = values;
 
@@ -21,7 +22,7 @@ const AdminSignup = () => {
         event.preventDefault();
         setValues({ ...values, error: false });
         const user = { name: name, email: email, password: password }
-        return fetch('http://localhost:8000/signup', {
+        return fetch(`${API}/signup`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

@@ -8,25 +8,17 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import fs from 'fs'
 
-// Load environment variables
 dotenv.config()
 
-// Set up __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-// Create upload directory if not exists
-const uploadDir = path.join(__dirname, 'imgUploads')
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir)
-}
 
 const app = express()
 
 
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? 'https://mern-blog-2025.onrender.com' 
+    ? 'comhttps://mern-blog-2025.onrender.' 
     : 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

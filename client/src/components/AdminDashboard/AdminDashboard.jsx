@@ -7,13 +7,15 @@ const AdminDashboard = () => {
   const [posts, setPosts] = useState([]);
   const [redirect, setRedirect] = useState(false)
 
+  const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
+  
    const {
     user: { _id, name, email, role },
   } = isAuthenticated();
 
   const getAllPosts = async () => {
     try {
-      const response = await fetch('http://localhost:8000/posts/');
+      const response = await fetch(`${API}/posts/`);
       const data = await response.json();
       setPosts(data);
     } catch (err) {
@@ -23,7 +25,7 @@ const AdminDashboard = () => {
 
   const deletePost = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/posts/${id}`, {
+      const response = await fetch(`${API}/posts/${id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",

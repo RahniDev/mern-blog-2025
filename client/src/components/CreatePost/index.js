@@ -1,6 +1,7 @@
+const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
 export const createPost = (token, formData) => {
     console.log(formData)
-    return fetch('http://localhost:8000/posts/new-post', {
+    return fetch(`${API}/posts/new-post`, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,

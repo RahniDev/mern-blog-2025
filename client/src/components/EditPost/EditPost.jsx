@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { isAuthenticated } from "../Auth/index";
 import './editPost.css'
 
 const EditPost = () => {
@@ -10,6 +9,7 @@ const EditPost = () => {
     error: "",
     updatedPost: "",
   });
+  const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
 
   const [post, setPost] = useState({ title: values.title, body: values.body });
   const { title, body, error, updatedPost } = values;
@@ -18,9 +18,8 @@ const EditPost = () => {
 
   const getSinglePost = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/posts/${params.slug}/${params.id}`)
+      const response = await fetch(`${API}/posts/${params.slug}/${params.id}`)
       const data = await response.json()
-      console.log('data: ', data)
       setValues({ ...values, title: data.title, body: data.body });
       setPost({ title: values.title, body: values.body })
     } catch (err) {

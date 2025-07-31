@@ -1,5 +1,7 @@
+const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
+
 export const signup = user => {
-    return fetch('http://localhost:8000/signup', {
+    return fetch(`${API}/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -16,7 +18,7 @@ export const signup = user => {
 };
 
 export const signin = user => {
-    return fetch('http://localhost:8000/signin', {
+    return fetch(`${API}/signin`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -50,7 +52,7 @@ export const signout = next => {
     if (typeof window !== 'undefined') {
         localStorage.removeItem('jwt');
         next();
-        return fetch('http://localhost:8000/signout', {
+        return fetch(`${API}/signout`, {
             method: 'GET'
         })
             .then(response => {
@@ -77,7 +79,7 @@ export const isAuthenticated = () => {
 };
 
 export const read = (userId, token) => {
-    return fetch(`http://localhost:8000/user/${userId}`, {
+    return fetch(`${API}/user/${userId}`, {
         method: "GET",
         headers: {
             Accept: "application/json",

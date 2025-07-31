@@ -7,11 +7,13 @@ const ReadPost = () => {
   const [postImage, setPostImage] = useState({})
   const [error, setError] = useState(false)
 
+  const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
+
   const params = useParams();
 
   const getSinglePost = async () => {
     try {
-      const response = await fetch(`/posts/${params.slug}/${params.id}`)
+      const response = await fetch(`${API}/posts/${params.slug}/${params.id}`)
       const data = await response.json()
       setPost(data)
     } catch (err) {
@@ -20,7 +22,7 @@ const ReadPost = () => {
   }
   const getPostImage = async () => {
     try {
-      const response = await fetch(`/posts/post/photo/${params.id}`)
+      const response = await fetch(`${API}/posts/post/photo/${params.id}`)
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
       setPostImage(imageUrl);

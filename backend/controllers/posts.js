@@ -1,9 +1,7 @@
 import Post from "../models/Post.js"
 import mongoose from "mongoose"
-import { errorHandler } from "../helpers/dbErrorHandler.js";
 import formidable from 'formidable';
 import fs from 'fs'
-
 
 export const list = (req, res) => {
     
@@ -12,7 +10,7 @@ export const list = (req, res) => {
         .sort(sort)
         .then((posts) => {
             const postsWithImageUrls = posts.map(post => {
-                const imageUrl = post.photo ? `http://localhost:8000/posts/post/photo/${post._id}` : null;
+                const imageUrl = post.photo ? `${req.protocol}://${req.get('host')}/posts/post/photo/${post._id}` : null;
                 return { ...post.toObject(), imageUrl };
             }
             );

@@ -4,10 +4,11 @@ import './allPosts.css'
 
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState([])
+  const API = import.meta.env.VITE_REACT_APP_API_BASE_URL || '';
 
   const getAllPosts = async () => {
     try {
-      const response = await fetch('/posts/');
+      const response = await fetch(`${API}/posts`);
       const data = await response.json();
       setAllPosts(data);
     } catch (err) {
@@ -22,7 +23,7 @@ const AllPosts = () => {
   return (
     <section className='all-posts'>
         {allPosts && allPosts.map((post) =>
-          <Link className="grid_single-post" key={post._id} to={`/${post.slug}/${post._id}`}><div key={post._id}>
+          <Link className="grid_single-post" key={post._id} to={`${API}/${post.slug}/${post._id}`}><div key={post._id}>
              {post.imageUrl && (
               <img
                 src={post.imageUrl}
