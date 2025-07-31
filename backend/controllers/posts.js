@@ -51,35 +51,44 @@ export const readById = (req, res) => {
 }
 
 export const create = (req, res) => {
-    const { fields, files } = req;
+    const form = formidable({ multiples: false });
+    form.parse(req, (err, fields, files) => {
+        // console.log('FIELDS:', fields);
+        // console.log('FILES:', files);
+        if (err) {
+            console.error("Form parsing error:", err);
+            return res.status(400).json({ error: "Image could not be uploaded" });
+        }
+        const title = Array.isArray(fields.title) ? fields.title[0] : fields.title;
+        const body = Array.isArray(fields.body) ? fields.body[0] : fields.body;
 
-    const post = new Post(fields);
+        const post = new Post({title,
+            body});
 
-    if (files && files.photo) {
-        const photoFilePath = files.photo.path;
-        const photoSize = files.photo.size;
+        if (files.photo && files.photo.length > 0) {
+            const photo = files.photo[0];
 
-        if (photoSize > 1000000) {
-            return res.status(400).json({
-                error: "Image should be less than 1MB in size."
-            });
+            const photoSize = photo.size;
+
+            if (photoSize > 1_000_000) {
+                return res.status(400).json({
+                    error: "Image should be less than 1MB in size."
+                });
+            }
+
+            post.photo.data = fs.readFileSync(photo.filepath);
+            post.photo.contentType = photo.mimetype;  // Set the MIME type
         }
 
-        post.photo.data = fs.readFileSync(photoFilePath);
-        post.photo.contentType = files.photo.type;  // Set the MIME type of the image
-    }
-
-    post.save()
-        .then((result) => {
-            res.json(result);
-        })
-        .catch((err) => {
-            console.error("Error saving post:", err);
-            return res.status(400).json({
-                error: "Error saving post to the database",
-                message: err.message,
+        post.save()
+            .then((result) => res.json(result))
+            .catch((err) => {
+                console.error("Error saving post:", err);
+                res.status(400).json({
+                    error: "Error saving post to the database"
+                });
             });
-        });
+    })
 };
 
 

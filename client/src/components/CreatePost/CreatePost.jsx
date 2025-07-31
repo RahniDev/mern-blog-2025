@@ -20,7 +20,7 @@ const CreatePost = () => {
         formData
     } = values
 
-    const createPostOnSubmit = e => {
+      const createPostOnSubmit = e => {
         e.preventDefault();
             setValues({ ...values, error: "" });
         createPost(token, formData).then((error) => {
@@ -38,6 +38,7 @@ const CreatePost = () => {
             }
         });
     };
+
 
     const handleChange = (name) => (event) => {
         const value = name === "photo" ? event.target.files[0] : event.target.value;

@@ -13,7 +13,7 @@ import {
 
 router.get("/", list)
 router.get("/:slug/:id", readById)
-router.post("/new-post", formidable(), create)
+router.post("/new-post", create)
 router.put("/:id/edit", edit)
 router.get('/post/photo/:postId', getImage)
 router.delete("/:id", (deletePost))
