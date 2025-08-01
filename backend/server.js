@@ -18,7 +18,7 @@ const app = express()
 
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'
-    ? 'https://mern-blog-2025.onrender.com' 
+    ? 'https://mern-blog-2025.onrender.com'
     : 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -34,9 +34,12 @@ mongoose.connection
 
 
 app.use(express.json())
-app.use(morgan('dev'))
+app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cookieParser())
 
+app.get('/', (req, res) => {
+  res.send('API is running');
+});
 
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/user.js'
