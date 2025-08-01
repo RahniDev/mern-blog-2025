@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "NODE_OPTIONS=--tls-min-v1.2 node server.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
@@ -17,12 +17,14 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.1",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10",
     "slugify": "^1.6.6",
     "uuidv1": "^1.6.14"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
