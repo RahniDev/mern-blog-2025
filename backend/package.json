@@ -1,6 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "NODE_OPTIONS=--tls-min-v1.2 node server.js"
