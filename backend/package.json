@@ -2,10 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "type": "module",
-  
   "main": "server.js",
   "scripts": {
-    "start": "npm --prefix client run build && NODE_OPTIONS=--tls-min-v1.2 node server.js"
+    "start": "NODE_OPTIONS=--tls-min-v1.2 node server.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.7",
