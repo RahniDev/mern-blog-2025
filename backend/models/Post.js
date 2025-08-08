@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const slugify = require("slugify")
+import mongoose from "mongoose"
+import slugify from "slugify"
 
 
 const postSchema = new mongoose.Schema({
@@ -29,4 +29,5 @@ postSchema.pre("validate", function (next) {
     next()
 })
 
-module.exports = mongoose.model("Post", postSchema)
+const Post = mongoose.model('Post', postSchema)
+export default Post

@@ -1,6 +1,5 @@
 import User from "../models/User.js"
 
-
 export const userById = (req, res, next, id) => {
     User.findById(id).exec((err, user) => {
         if (err || !user) {

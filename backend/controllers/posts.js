@@ -1,5 +1,4 @@
 import Post from "../models/Post.js"
-import mongoose from "mongoose"
 import formidable from 'formidable';
 import fs from 'fs'
 

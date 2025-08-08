@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-const { createHmac } = require('node:crypto');
-const uuidv1 = require('uuidv1')
+import mongoose from 'mongoose'
+import { createHmac } from 'node:crypto';
+import uuidv1 from 'uuidv1'
 
 const userSchema = new mongoose.Schema({
 name: {
@@ -60,4 +60,5 @@ authenticate: function(plainText) {
     }
 }
 
-module.exports = mongoose.model("User", userSchema)
+const User = mongoose.model('User', userSchema)
+export default User
