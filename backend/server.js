@@ -37,10 +37,6 @@ app.use(express.json())
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(cookieParser())
 
-app.get('/', (req, res) => {
-  res.send('API is running');
-});
-
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/user.js'
 import postRoutes from './routes/posts.js'
@@ -50,7 +46,7 @@ app.use('/', userRoutes)
 app.use('/posts', postRoutes)
 
 
-const buildPath = path.join(__dirname, '..', 'client', 'build')
+const buildPath = path.join(__dirname, '..', 'client', 'dist');
 if (fs.existsSync(buildPath)) {
   app.use(express.static(buildPath))
   app.get('*', (req, res) => {
