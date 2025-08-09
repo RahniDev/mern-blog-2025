@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import './adminSignup.css'
+import './adminSignUp.css'
 
 const AdminSignup = () => {
     const [values, setValues] = useState({

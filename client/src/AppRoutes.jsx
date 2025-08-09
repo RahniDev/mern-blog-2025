@@ -5,7 +5,7 @@ import EditPost from './components/EditPost/EditPost.jsx'
 import ReadPost from './components/ReadPost/ReadPost.jsx'
 import AdminDashboard from './components/AdminDashboard/AdminDashboard.jsx'
 import AdminLogin from './components/AdminLogin/AdminLogin.jsx'
-import AdminSignup from './components/AdminSignup/AdminSignup.jsx'
+import AdminSignup from './components/AdminSignUp/AdminSignUp.jsx'
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx'
 import AdminRoute from "./components/Auth/AdminRoute.jsx";
