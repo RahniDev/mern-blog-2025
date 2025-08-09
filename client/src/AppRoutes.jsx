@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './components/Home'
-import CreatePost from './components/CreatePost/CreatePost'
-import EditPost from './components/EditPost/EditPost'
-import ReadPost from './components/ReadPost/ReadPost'
-import AdminDashboard from './components/AdminDashboard/AdminDashboard'
-import AdminLogin from './components/AdminLogin/AdminLogin'
-import AdminSignup from './components/AdminSignup/AdminSignup'
-import Navbar from './components/Navbar/Navbar';
-import Footer from './components/Footer/Footer'
-import AdminRoute from "./components/Auth/AdminRoute";
+import Home from './components/Home.jsx'
+import CreatePost from './components/CreatePost/CreatePost.jsx'
+import EditPost from './components/EditPost/EditPost.jsx'
+import ReadPost from './components/ReadPost/ReadPost.jsx'
+import AdminDashboard from './components/AdminDashboard/AdminDashboard.jsx'
+import AdminLogin from './components/AdminLogin/AdminLogin.jsx'
+import AdminSignup from './components/AdminSignup/AdminSignup.jsx'
+import Navbar from './components/Navbar/Navbar.jsx';
+import Footer from './components/Footer/Footer.jsx'
+import AdminRoute from "./components/Auth/AdminRoute.jsx";
 
 const AppRoutes = () => {
 
