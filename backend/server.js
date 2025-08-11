@@ -53,6 +53,15 @@ if (fs.existsSync(buildPath)) {
     res.sendFile(path.join(buildPath, 'index.html'))
   })
 }
+app.use((err, req, res, next) => {
+  if (err instanceof TypeError && err.message.includes('path-to-regexp')) {
+    return res.status(400).json({ 
+      error: 'Invalid route parameters',
+      solution: 'Ensure routes use explicit parameter patterns' 
+    });
+  }
+  next(err);
+});
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

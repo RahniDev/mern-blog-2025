@@ -23,7 +23,7 @@ const AllPosts = () => {
   return (
     <section className='all-posts'>
         {allPosts && allPosts.map((post) =>
-          <Link className="grid_single-post" key={post._id} to={`${API}/${post.slug}/${post._id}`}><div key={post._id}>
+          <Link className="grid_single-post" key={post._id} to={`/${post.slug}/${post._id}`}><div key={post._id}>
              {post.imageUrl && (
               <img
                 src={post.imageUrl}
